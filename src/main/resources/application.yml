@@ -13,9 +13,9 @@ spring:
           no-store: true
 
   datasource:
-    url: ${DB_URL}                      # 예: jdbc:mysql://host:3306/ssauc?serverTimezone=Asia/Seoul&characterEncoding=UTF-8&useSSL=false&allowPublicKeyRetrieval=true
-    username: ${DB_USERNAME}           # 예: root
-    password: ${DB_PASSWORD}           # 예: 12341234
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       pool-name: WinnerHikariPool
@@ -35,10 +35,10 @@ spring:
         hibernate:
           use_sql_comments: true
           format_sql: true
-          generate_statistics: true
+          generate_statistics: false
           dialect: org.hibernate.dialect.MySQLDialect
     defer-datasource-initialization: true
-    show-sql: true
+    show-sql: false
   sql:
     init:
       mode: always
@@ -46,9 +46,9 @@ spring:
   # Elasticsearch
   elasticsearch:
     rest:
-      uris: ${ES_URIS}               # 예: http://13.124.206.209:9200
-      username: ${ES_USERNAME}       # 예: elastic
-      password: ${ES_PASSWORD}       # 예: -PoYyP0VsLDZwu_efG0e
+      uris: ${ES_URIS}
+      username: ${ES_USERNAME}
+      password: ${ES_PASSWORD}
     ssl:
       enabled: false
       verification-mode: none
@@ -60,8 +60,8 @@ spring:
       connection-timeout: 5000
       read-timeout: 10000
     redis:
-      host: ${REDIS_HOST}         # 13.124.206.209
-      port: ${REDIS_PORT}         # 6380
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
       password: ${REDIS_PASSWORD}
       database: 0
 
@@ -113,13 +113,13 @@ spring:
 logging:
   level:
     root: INFO
-    com.example.demo: DEBUG
-    org.springframework.web: DEBUG
+    com.example.ssauc: DEBUG
+    org.springframework.web: INFO
     org.thymeleaf: INFO
-    org.springframework.boot.web.servlet: ERROR
+    org.springframework.boot.web.servlet: WARN # ERROR
     org.hibernate.SQL: DEBUG
-    org.hibernate.type.descriptor.sql: TRACE
-    org.hibernate.stat: DEBUG
+    org.hibernate.orm.jdbc.bind: TRACE
+    org.hibernate.stat: INFO
   file:
     name: logs/app.log
     path: logs
@@ -141,7 +141,7 @@ server:
 
 # file upload
 upload:
-  path: "C:/Users/A/ssauc/ssauc/src/main/resources/static/upload"
+  path: ${UPLOAD_PATH}
 
 # AWS S3
 aws:
